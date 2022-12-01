@@ -44,5 +44,5 @@ mongoose.connect(
 );
 
 // Starting server
-const port: number = parseInt(`${process.env.PORT}`) | 5000;
+const port: number = parseInt(`${process.env.PORT}`) || 5000;
 app.listen(port, () => console.log(`Server listening on port ${port}!`));

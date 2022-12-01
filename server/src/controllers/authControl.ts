@@ -11,7 +11,10 @@ export const createUser = async (req: Request, res: Response) => {
   if (error) return res.status(400).json({ message: error.details[0].message });
 
   try {
-    const password = await hash(unHashedPass, 10);
+    const emailExists = await User.findOne({ email: req.body.email });
+    if (emailExists) return res.status(400).json("Email already exists");
+
+    const password: string = await hash(unHashedPass, 10);
 
     const newUser = await User.create({
       username,

@@ -7,8 +7,9 @@ import dotenv from "dotenv";
 import session from "express-session";
 import passport from "passport";
 import authRoutes from "./routes/authRoutes";
-import { origin } from "./urls";
+import { clientURL as origin } from "./urls";
 
+import "./passport/emailAndPassword";
 dotenv.config();
 
 const app = express(); // Initialize express app

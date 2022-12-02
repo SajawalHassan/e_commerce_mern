@@ -9,7 +9,7 @@ import passport from "passport";
 import authRoutes from "./routes/authRoutes";
 import { clientURL as origin } from "./urls";
 
-import "./passport/emailAndPassword";
+import "./passport/localStrategy";
 dotenv.config();
 
 const app = express(); // Initialize express app

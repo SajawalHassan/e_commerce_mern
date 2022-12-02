@@ -24,10 +24,6 @@ const TextField = ({
     if (error) setError("");
   };
 
-  useEffect(() => {
-    if (error) setValue("");
-  }, [error]);
-
   return (
     <div
       className={`flex flex-col space-y-0.5 mt-[16px] ${
@@ -37,7 +33,7 @@ const TextField = ({
       <p className="text-xs text-left">{label}</p>
       <input
         type={type.toLowerCase()}
-        placeholder={error ? error : placeholder}
+        placeholder={placeholder}
         className={`text-xs w-full outline-none border-b ${
           error
             ? `placeholder:text-red border-red`

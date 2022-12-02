@@ -31,9 +31,6 @@ const Signup = (): JSX.Element => {
       navigate("/auth/signin");
     } catch (error: any) {
       setError(error.response?.data.message);
-      setTimeout(() => {
-        setError("");
-      }, 3000);
     } finally {
       setIsLoading(false);
     }
@@ -49,6 +46,11 @@ const Signup = (): JSX.Element => {
         handleOnClick={(e: SyntheticEvent) => handleOnClick(e)}
         className="mb-3"
       >
+        {error && (
+          <p className="py-[11px] w-full bg-red bg-opacity-20 border border-red text-small mt-4">
+            {error}
+          </p>
+        )}
         <TextField
           type="text"
           error={error.toLocaleLowerCase().includes("username") ? error : ""}

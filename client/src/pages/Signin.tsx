@@ -31,10 +31,6 @@ const Signin = (): JSX.Element => {
       navigate("/");
     } catch (error: any) {
       setError("Invalid email or password");
-
-      setTimeout(() => {
-        setError("");
-      }, 3000);
     } finally {
       setIsLoading(false);
     }
@@ -50,6 +46,11 @@ const Signin = (): JSX.Element => {
         handleOnClick={(e: SyntheticEvent) => handleOnClick(e)}
         className="mb-3"
       >
+        {error && (
+          <p className="py-[11px] w-full bg-red bg-opacity-20 border border-red text-small mt-4">
+            {error}
+          </p>
+        )}
         <TextField
           type="text"
           error={error ? error : ""}

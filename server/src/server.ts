@@ -11,6 +11,7 @@ import userRoutes from "./routes/userRoutes";
 import { clientURL as origin } from "./urls";
 
 import "./passport/localStrategy";
+import "./passport/googleStrategy";
 import verifyUser from "./middleware/verifyUser";
 dotenv.config();
 

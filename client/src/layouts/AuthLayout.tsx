@@ -1,9 +1,10 @@
-import { ReactNode, SyntheticEvent } from "react";
+import { ReactNode, SyntheticEvent, useEffect } from "react";
 import ThirdPartyAuthBtn from "../components/auth/ThirdPartyAuthBtn";
 import googleLogo from "../assets/google_logo.png";
 import githubLogo from "../assets/github_logo.png";
 import { Link } from "react-router-dom";
 import Loader from "../components/global/Loader";
+import { baseURL as serverURL } from "../api/axios";
 
 interface Types {
   heading: string;
@@ -22,6 +23,14 @@ const AuthLayout = ({
   isLoading,
   className,
 }: Types): JSX.Element => {
+  const continueWithGoogle = (): void => {
+    window.open(`${serverURL}/auth/google/callback`, "_self");
+  };
+
+  const continueWithGithub = (): void => {
+    console.log("Github!");
+  };
+
   return (
     <div className="text-center rounded-sm shadow-[0_0_6px_2px_rgba(0,0,0,0.25)] pb-[17px] pt-[22px] flex flex-col justify-center px-6 mx-10 h-max fixed inset-0 m-auto">
       <h1 className="text-large font-bold italic">{heading}</h1>
@@ -42,8 +51,16 @@ const AuthLayout = ({
           <div className="border-b mt-0.5 border-dgray w-1/2" />
         </div>
         <div className="flex flex-col gap-y-[8px] mt-[14px]">
-          <ThirdPartyAuthBtn img={googleLogo} label="Continue with Google" />
-          <ThirdPartyAuthBtn img={githubLogo} label="Continue with Github" />
+          <ThirdPartyAuthBtn
+            handleOnClick={continueWithGoogle}
+            img={googleLogo}
+            label="Continue with Google"
+          />
+          <ThirdPartyAuthBtn
+            handleOnClick={continueWithGithub}
+            img={githubLogo}
+            label="Continue with Github"
+          />
         </div>
         {heading.toLowerCase() === "sign up" ? (
           <p className="auth-navigate-text">

@@ -2,6 +2,7 @@ import { Strategy as LocalStrategy } from "passport-local";
 import passport from "passport";
 import User from "../models/User";
 import { compare } from "bcrypt";
+import { ExpressUser } from "../interfaces/interfaces";
 
 passport.use(
   new LocalStrategy(
@@ -12,7 +13,7 @@ passport.use(
     },
     async (_req, email: string, password: string, done): Promise<void> => {
       // Making sure email is correct
-      const user = await User.findOne({ email });
+      const user: ExpressUser | null = await User.findOne({ email });
       if (!user) return done("Invalid email or password");
 
       // Making sure the password is correct

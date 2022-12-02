@@ -1,5 +1,5 @@
 import { SyntheticEvent, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { NavigateFunction, useNavigate } from "react-router-dom";
 import axios from "../api/axios";
 import Header from "../components/global/Header";
 import TextField from "../components/global/TextField";
@@ -11,29 +11,24 @@ const Signin = (): JSX.Element => {
   const [error, setError] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  const navigate = useNavigate();
+  const navigate: NavigateFunction = useNavigate();
 
   const handleOnClick = async (e: SyntheticEvent): Promise<void> => {
     e.preventDefault();
     setIsLoading(true);
 
-    // if (!email || !password) {
-    //   setIsLoading(false);
-    //   return setError("Invalid email or password");
-    // }
+    if (!email || !password) {
+      setIsLoading(false);
+      return setError("Invalid email or password");
+    }
 
     try {
-      const { data } = await axios.post(
-        "/auth/login",
-        {
-          email,
-          password,
-        },
-        { withCredentials: false }
-      );
+      await axios.post("/auth/login", {
+        email,
+        password,
+      });
 
-      console.log(data.user);
-      // navigate("/");
+      navigate("/");
     } catch (error: any) {
       setError("Invalid email or password");
 

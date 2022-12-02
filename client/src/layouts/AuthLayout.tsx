@@ -23,7 +23,7 @@ const AuthLayout = ({
   className,
 }: Types): JSX.Element => {
   return (
-    <div className="text-center rounded-sm shadow-[0_0_6px_2px_rgba(0,0,0,0.25)] pb-[17px] pt-[22px] flex flex-col justify-center px-6 mx-10 fixed inset-0 m-auto h-max">
+    <div className="text-center rounded-sm shadow-[0_0_6px_2px_rgba(0,0,0,0.25)] pb-[17px] pt-[22px] flex flex-col justify-center px-6 mx-10 h-max fixed inset-0 m-auto">
       <h1 className="text-large font-bold italic">{heading}</h1>
       <p className="text-small text-gray">{subHeading}</p>
       <form onSubmit={handleOnClick}>

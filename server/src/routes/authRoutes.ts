@@ -13,8 +13,4 @@ router.post(
   (req: Request, res: Response): Response<JSON> => res.json({ user: req.user })
 );
 
-router.get("/user", (req: Request, res: Response): void => {
-  res.json({ user: req.user });
-});
-
 export default router;

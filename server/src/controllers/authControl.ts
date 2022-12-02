@@ -4,7 +4,10 @@ import { validateCreateUserData } from "../validation/authValidation";
 import { hash } from "bcrypt";
 import User from "../models/User";
 
-export const createUser = async (req: Request, res: Response) => {
+export const createUser = async (
+  req: Request,
+  res: Response
+): Promise<void | Response<JSON, Record<string, any>>> => {
   const { username, email, password: unHashedPass, profilePic } = req.body;
 
   const { error } = validateCreateUserData(req.body);

@@ -7,9 +7,11 @@ import dotenv from "dotenv";
 import session from "express-session";
 import passport from "passport";
 import authRoutes from "./routes/authRoutes";
+import userRoutes from "./routes/userRoutes";
 import { clientURL as origin } from "./urls";
 
 import "./passport/localStrategy";
+import verifyUser from "./middleware/verifyUser";
 dotenv.config();
 
 const app = express(); // Initialize express app
@@ -30,8 +32,10 @@ app.use(cors({ origin, credentials: true }));
 app.use(morgan("dev"));
 app.use(helmet());
 
-// Route middleware
+// Routes middleware
 app.use("/auth", authRoutes);
+app.use(verifyUser);
+app.use("/users", userRoutes);
 
 // Mongoose
 mongoose.connect(

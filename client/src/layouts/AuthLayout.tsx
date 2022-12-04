@@ -28,7 +28,7 @@ const AuthLayout = ({
   };
 
   const continueWithGithub = (): void => {
-    console.log("Github!");
+    window.open(`${serverURL}/auth/github/callback`, "_self");
   };
 
   return (

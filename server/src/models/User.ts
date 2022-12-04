@@ -17,6 +17,7 @@ const userSchema: Schema = new Schema({
     type: String,
     min: 8,
     max: 1024,
+    default: "",
   },
   profilePic: {
     type: String,

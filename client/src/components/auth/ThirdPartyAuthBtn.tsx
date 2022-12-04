@@ -11,6 +11,7 @@ const ThirdPartyAuthBtn = ({
 }: Types): JSX.Element => {
   return (
     <button
+      type="button"
       className="border border-gray rounded-sm flex items-center h-[23px] relative hover:bg-dgray hover:bg-opacity-30"
       onClick={handleOnClick}
     >

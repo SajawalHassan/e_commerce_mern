@@ -12,6 +12,7 @@ import { clientURL as origin } from "./urls";
 
 import "./passport/localStrategy";
 import "./passport/googleStrategy";
+import "./passport/githubStrategy";
 import verifyUser from "./middleware/verifyUser";
 dotenv.config();
 

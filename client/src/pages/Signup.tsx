@@ -30,7 +30,7 @@ const Signup = (): JSX.Element => {
 
       navigate("/auth/signin");
     } catch (error: any) {
-      setError(error.response?.data.message);
+      setError(error?.response?.data.message);
     } finally {
       setIsLoading(false);
     }
@@ -53,7 +53,7 @@ const Signup = (): JSX.Element => {
         )}
         <TextField
           type="text"
-          error={error.toLocaleLowerCase().includes("username") ? error : ""}
+          error={error?.toLowerCase().includes("username") ? error : ""}
           setError={setError}
           label="Username"
           placeholder="John Doe"
@@ -62,7 +62,7 @@ const Signup = (): JSX.Element => {
         />
         <TextField
           type="text"
-          error={error.toLocaleLowerCase().includes("email") ? error : ""}
+          error={error?.toLowerCase().includes("email") ? error : ""}
           setError={setError}
           label="Email"
           placeholder="johndoe@gmail.com"
@@ -72,7 +72,7 @@ const Signup = (): JSX.Element => {
         <TextField
           type="password"
           error={
-            error.toLocaleLowerCase().includes("password" || "passwords")
+            error?.toLowerCase().includes("password" || "passwords")
               ? error
               : ""
           }
@@ -84,7 +84,7 @@ const Signup = (): JSX.Element => {
         />
         <TextField
           type="password"
-          error={error.toLocaleLowerCase().includes("passwords") ? error : ""}
+          error={error?.toLowerCase().includes("passwords") ? error : ""}
           setError={setError}
           label="Confirm Password"
           placeholder="Confirm Password"

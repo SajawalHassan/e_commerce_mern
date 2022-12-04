@@ -1,11 +1,11 @@
-import Joi from "joi";
+import Joi, { ValidationResult } from "joi";
 
-export const validateCreateUserData = (data: object) => {
+export const validateCreateUserData = (
+  data: object
+): ValidationResult<object> => {
   const object: Joi.Schema = Joi.object({
     username: Joi.string().min(3).max(255).required(),
     email: Joi.string().email().min(3).max(255).required(),
-    password: Joi.string().min(8).max(1024).required(),
-    profilePic: Joi.string().allow(""),
   });
 
   return object.validate(data);

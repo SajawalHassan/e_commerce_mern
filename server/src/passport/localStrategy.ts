@@ -5,6 +5,7 @@ import { compare } from "bcrypt";
 import { ExpressUser } from "../interfaces/interfaces";
 
 passport.use(
+  "local",
   new LocalStrategy(
     {
       usernameField: "email",

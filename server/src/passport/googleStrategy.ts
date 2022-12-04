@@ -9,32 +9,37 @@ import { ExpressUser } from "../interfaces/interfaces";
 
 dotenv.config();
 
+export let redirectToStep2: boolean = false;
+
 passport.use(
+  "google",
   new GoogleStrategy(
     {
-      clientID: `${process.env.CLIENT_ID}`,
-      clientSecret: `${process.env.CLIENT_SECRET}`,
+      clientID: `${process.env.GOOGLE_CLIENT_ID}`,
+      clientSecret: `${process.env.GOOGLE_CLIENT_SECRET}`,
       callbackURL: "/auth/google/callback",
       scope: ["profile", "email"],
     },
-    async (
-      _accessToken: string,
-      _refreshToken: string,
-      profile: any,
-      done: VerifyCallback
-    ): Promise<void> => {
-      const user: ExpressUser | null = await User.findById(profile._id);
+    // prettier-ignore
+    async ( _accessToken: string, _refreshToken: string, profile: any, done: VerifyCallback ): Promise<void> => {
+      // Logs user in and creates user if it doesn't exist.
+      const user: ExpressUser | null = await User.findOne({
+        email: profile.emails[0].value,
+      });
       if (user) {
         return done(null, user);
-      } else {
-        const newUser: Express.User = await User.create({
-          username: profile.displayName,
-          email: profile.emails[0].value,
-          profilePic: profile.photos[0].value,
-        });
-
-        return done(null, newUser);
       }
+
+      redirectToStep2 = true;
+
+      const newUser: Express.User = await User.create({
+        username: profile.displayName,
+        email: profile.emails[0].value,
+        profilePic: profile.photos[0].value,
+        googleId: profile.id,
+      });
+
+      return done(null, newUser);
     }
   )
 );
